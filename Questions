@@ -5,7 +5,8 @@ Questions Related to Capstone Project: ETL for Data Load Reconciliation
 3. Will the source and Target system will have Dbs or files or Excel sheet for data validation?
 4. Do we have to create an ETL tool or use an already existing one?
 5. UI brief idea
-6. How many scenerios do we have to implement? Table to Table or 2 incompatible tables
+6. How many scenerios do we have to implement? Table to Table or 2 incompatible tables, if target will be empty?
+7. What will be the major functionalities?
 
 ---------------------------
 
