@@ -7,6 +7,7 @@ Questions Related to Capstone Project: ETL for Data Load Reconciliation
 5. UI brief idea
 6. How many scenerios do we have to implement? Table to Table or 2 incompatible tables, if target will be empty?
 7. What will be the major functionalities?
+8. After transforming the data from source do we have to transform it again before loading into the target?
 
 ---------------------------
 
