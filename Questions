@@ -1,0 +1,20 @@
+Questions Related to Capstone Project: ETL for Data Load Reconciliation
+
+1. Data schema and type of data (relational or files)
+2. Data format
+3. Will the source and Target system will have Dbs or files or Excel sheet for data validation?
+4. Do we have to create an ETL tool or use an already existing one?
+5. UI brief idea
+6. How many scenerios do we have to implement? Table to Table or 2 incompatible tables
+
+---------------------------
+
+1. What is the source system(is it a data warehouse that has all the files)
+2. What is the target system
+3. What are different types of data validations
+4. Give us the sample row data 
+5. Is value based validations to be done on each column
+6. For different granularity between source and destination, need some examples
+7. Against what the summary will be checked
+
+
