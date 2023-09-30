@@ -28,7 +28,7 @@ public class PdfGeneratorService {
 
             contentStream.close();
 
-            String pdfFilePath = "sample.pdf";
+            String pdfFilePath = "report.pdf";
             document.save(pdfFilePath);
 
             return pdfFilePath;

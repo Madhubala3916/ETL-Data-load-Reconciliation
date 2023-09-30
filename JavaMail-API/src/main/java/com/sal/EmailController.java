@@ -9,11 +9,11 @@ public class EmailController {
     @Autowired
     private EmailService emailService;
     @Autowired
-    private PdfGeneratorService pdfGeneratorService; // Inject the PdfGeneratorService
+    private PdfGeneratorService pdfGeneratorService;
     @GetMapping("/sendEmail")
     public String sendEmail() throws IOException {
         String pdfFilePath = pdfGeneratorService.generatePDF();
-        emailService.sendEmailWithAttachment("simiaktar527@gmail.com", "Hello, World!", "This is a test email from Spring Boot with PDF attachment.", pdfFilePath);
+        emailService.sendEmailWithAttachment("madhubala4065@gmail.com", "Hello", "Report PDF.", pdfFilePath);
         return "Email sent!";
     }
 }
