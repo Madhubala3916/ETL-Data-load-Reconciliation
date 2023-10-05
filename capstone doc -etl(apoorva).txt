@@ -1,0 +1,28 @@
+
+Project Title: ETL for Data Load Reconciliation
+Project Overview:
+The "ETL for Data Load Reconciliation" project aims to automate the reconciliation process between source systems and a target database. It involves data extraction, validation, reporting, and automated notifications to ensure data integrity.
+Databases:
+Source Systems:
+1.	Oracle Database:
+•	Schema
+•	Tables
+•	Data Extraction Method
+2.	MySQL Database:
+•	Schema
+•	Tables
+•	Data Extraction Method
+Target Database:
+•	Microsoft SQL Server:
+•	Schema
+•	Tables
+•	Data Loading Method
+Notification API:
+•	Email: Automated email notifications are sent using [Email API/Service].
+Project Workflow:
+1.	Data Extraction: Data is extracted from source systems 
+2.	Data Validation: Validation rules are applied using [Validation APIs].
+3.	Error Handling: Erroneous data is stored in error and exception tables.
+4.	Reconciliation: Row count and value-based reconciliation is performed.
+5.	Report Generation: Reconciliation reports are generated.
+6.	Automated Notifications: Email notifications are sent via [Email API/Service] when discrepancies are detected.

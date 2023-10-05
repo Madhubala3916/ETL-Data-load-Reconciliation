@@ -1,0 +1,78 @@
+Project Title: ETL for Data Load Reconciliation 
+
+----Project Scope:----
+
+This project is all about making sure that data is transferred accurately from one place to another. Imagine you have data in one computer system (the source), and you want to move it to another computer system (the target). Sometimes, the data doesn't move perfectly, and this project helps us figure out what went wrong.
+
+There are two main things we check(Validations):
+
+Row Count Validation: This is like counting how many rows of data we had in the source computer and making sure the same number of rows ended up in the target computer. It's like checking if we lost any data while moving it.
+
+Value-Based Validation: Sometimes, it's not just about the number of rows. We also check if the actual data (the numbers, words, or whatever is in the rows) is the same in both places. For example, if we add up some numbers in the source computer and get a total, we want to make sure the total is the same in the target computer.
+
+----Project Description:----
+
+ETL Pipeline: We build a process that takes data from the source computer (like Oracle, MySQL, or Hadoop), and we apply some rules to it. If the data doesn't follow the rules, we put it in a special place called the "error and exception tables" to show that something is wrong.
+
+Generate Report: We then make a report using the data in the error and exception tables. This report shows what didn't go right when moving the data from source to target. It helps us see if the numbers match up.
+
+Interpreting the Report: We look at this report, and if we find that the data in the target computer is different from what we expected, we automatically send an email to the team in charge. This email alerts them that something needs to be fixed.
+
+In simple terms, this project makes sure that data moves correctly from one place to another, and if anything goes wrong, it tells the right people to fix it.
+
+
+----What is ETL pipeline?----
+
+An ETL (Extract, Transform, Load) pipeline is a set of processes and tools used in data integration and data warehousing to efficiently move data from its source to a destination where it can be analyzed or used for reporting. Each part of the ETL process serves a specific purpose:
+
+Extract: In this phase, data is extracted from one or more source systems, which could be databases, files, web services, or any other data repositories. The goal is to gather the required data from these sources for further processing.
+
+Transform: After extraction, the data often needs to be transformed to fit the target system's requirements or to make it suitable for analysis. Transformation tasks may include cleaning, filtering, aggregating, joining, and converting data. This step ensures that the data is consistent, accurate, and properly structured.
+
+Load: Once the data has been extracted and transformed, it is loaded into the target destination, which could be a data warehouse, a database, or a data lake. Loading involves inserting the data into the destination system in a format that is optimized for reporting, analysis, or other downstream processes.
+
+----Details----
+
+
+1. Approved Records ------ Rejected Records(Due to data,type mismatch, business validation failed etc.)
+
+2. Source System ------- Target System (Can be DB, File, Excel Sheet etc.)
+
+3. Reconciliation Types
+  a. Row Count Validation : total row count(Source) == total row count(Target)
+  b. Value-Based Validation : Value of records(Source) == Value of records(Target)
+
+	if (granularity(source) == granularity(target)){
+		do Row Count Validation
+	}
+	else{
+		do Value-Based Validation
+	}
+
+4. Erroneous Data
+Write erroneous data to error and exception tables based on validation rules.
+
+5.Reporting
+a. Generate a report from error and exception tables.
+b. This report will help understand and reconcile the number of rows extracted from the source system with the number of rows loaded into the target database.
+
+6. Email Notification
+Send an email notification to the production support team if the summary in the report doesn't match the expectations at the target level.
+
+Email Notifications:
+Use the following APIs for sending automated email notifications:
+JavaMail API: For Java-based email communication.
+SMTP API: For low-level email sending if needed.
+
+
+----Project Workflow:----
+
+1.	Data Extraction: Data is extracted from source systems 
+2.	Data Validation: Validation rules are applied using [Validation APIs].
+3.	Error Handling: Erroneous data is stored in error and exception tables.
+4.	Reconciliation: Row count and value-based reconciliation is performed.
+5.	Report Generation: Reconciliation reports are generated.
+6.	Automated Notifications: Email notifications are sent via [Email API/Service] when discrepancies are detected.
+
+
+
