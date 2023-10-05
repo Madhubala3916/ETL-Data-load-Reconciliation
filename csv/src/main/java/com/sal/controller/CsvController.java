@@ -12,7 +12,7 @@ public class CsvController {
     @GetMapping("/import-csv")
     public String importCsv() {
         try {
-            csvDataService.readCsvAndInsertData("C:\\Users\\Yamsani Apoorva\\Documents\\workspace-spring-tool-suite-4-4.19.0.RELEASE\\csv\\src\\bank_data_1.csv");
+            csvDataService.readCsvAndInsertData("D:\\ManipalClass\\CapstoneProject\\ETL-Data-load-Reconciliation\\bank_data_1.csv");
             return "Data imported successfully!";
         } catch (Exception e) {
             return "Error importing data: " + e.getMessage();
