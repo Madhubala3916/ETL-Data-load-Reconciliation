@@ -6,6 +6,7 @@ import com.mbd.repository.*;
 import com.mbd.validation.BranchValidationResult;
 import com.mbd.validation.DataValidator;
 import com.mbd.validation.ValidationResult;
+import com.mbd.validation.ValidationResultAccount;
 import com.mbd.validation.ValidationResultLoan;
 import com.mbd.validation.ValidationResultTransaction;
 
@@ -76,6 +77,22 @@ public class CSVService {
                 Set<ConstraintViolation<Branch>> violations = entry.getValue();
 
                 System.out.println("Handling erroneous branch: " + erroneousBranch.toString());
+                System.out.println("Violations: " + violations);
+                // Handle the erroneous branch and violations as needed
+            }
+            //-----------------account-----------------
+            List<Account> account1 = CSVHelper.account_func(file.getInputStream());
+
+            ValidationResultAccount validationResult2 = dataValidator.checkaccountValidation(account1); // Use BranchValidationResult
+
+            accountRepo.saveAll(validationResult2.getvalidAccounts()); // Use validationResult1
+
+            Map<Account, Set<ConstraintViolation<Account>>> erroneousAccounts = validationResult2.geterroneousAccounts(); // Use validationResult1
+            for (Map.Entry<Account, Set<ConstraintViolation<Account>>> entry : erroneousAccounts.entrySet()) {
+                Account erroneousAccount = entry.getKey();
+                Set<ConstraintViolation<Account>> violations = entry.getValue();
+
+                System.out.println("Handling erroneous branch: " + erroneousAccount.toString());
                 System.out.println("Violations: " + violations);
                 // Handle the erroneous branch and violations as needed
             }

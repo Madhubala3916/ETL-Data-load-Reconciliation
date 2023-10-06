@@ -1,5 +1,6 @@
 package com.mbd.validation;
 
+import com.mbd.model.Account;
 import com.mbd.model.Branch;
 import com.mbd.model.Customer;
 import com.mbd.model.Loan;
@@ -82,6 +83,30 @@ public class DataValidator {
         }
 
         return new ValidationResultLoan(validLoans, erroneousLoans);
+    }
+    //---------------account-------------------
+    public ValidationResultAccount checkaccountValidation(List<Account> accountList) {
+        List<Account> validAccounts = new ArrayList<>();
+        Map<Account, Set<ConstraintViolation<Account>>> erroneousaccounts = new HashMap<>();
+
+        for (Account acc : accountList) {
+            Set<ConstraintViolation<Account>> violations = validator.validate(acc);
+
+            if (!violations.isEmpty()) {
+                erroneousaccounts.put(acc, violations);
+                for (ConstraintViolation<Account> violation : violations) {
+                    errorEntity errorEntity = new errorEntity();
+                    errorEntity.setEntityName("Account");
+                    errorEntity.setErrorMessage("Validation Exception for account entity with account ID " + acc.getAccountID()  + ": " + violation.getMessage());
+//                    errorEntity.setTimestamp(LocalDateTime.now());
+                    errorEntityRepo.save(errorEntity);
+                }
+            } else {
+                validAccounts.add(acc);
+            }
+        }
+
+        return new ValidationResultAccount(validAccounts, erroneousaccounts);
     }
     //-----------------branch------------
     public BranchValidationResult checkBranchValidation(List<Branch> branches) {

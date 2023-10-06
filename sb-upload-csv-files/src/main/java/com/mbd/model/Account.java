@@ -1,6 +1,9 @@
 package com.mbd.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "accounts")
@@ -16,10 +19,13 @@ public class Account {
     @Column(name = "BranchID", nullable = false)
     private Long branchID;
 
+    @NotBlank(message="accountype cannot be blank")
     @Column(name = "AccountType", nullable = false)
     private String accountType;
 
+    @NotNull(message="balance cannot be null")
     @Column(name = "Balance", nullable = false)
+    @Min(value=5000,message="The minimum balance should be greater than 4999")
     private Double balance;
 
     public Account() {
