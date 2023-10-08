@@ -13,7 +13,7 @@ public class EmailController {
     @GetMapping("/sendEmail")
     public String sendEmail() throws IOException {
         String pdfFilePath = pdfGeneratorService.generatePDF();
-        emailService.sendEmailWithAttachment("sudhanshusharmaskr@gmail.com", "Hello!!! I love you", "Report PDF.", pdfFilePath);
+        emailService.sendEmailWithAttachment("simiaktar527@gmail.com", "Hello!!!", "Report PDF.", pdfFilePath);
         return "Email sent!";
     }
 }
