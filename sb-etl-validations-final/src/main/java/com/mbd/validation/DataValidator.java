@@ -1,0 +1,164 @@
+package com.mbd.validation;
+
+import com.mbd.model.Account;
+import com.mbd.model.Branch;
+import com.mbd.model.Customer;
+import com.mbd.model.Loan;
+import com.mbd.model.Transaction;
+import com.mbd.model.ErrorEntity;
+import com.mbd.repository.ErrorEntityRepository;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.*;
+
+@Component
+public class DataValidator {
+
+    private final Validator validator;
+
+    //@Autowired
+    public DataValidator() {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        this.validator = factory.getValidator();
+    }
+
+    @Autowired
+    private ErrorEntityRepository errorEntityRepo; // You need to create this repository.
+
+    public ValidationResult checkCustomerValidation(List<Customer> customer1) {
+        List<Customer> validCustomers = new ArrayList<>();
+        Map<Customer, Set<ConstraintViolation<Customer>>> erroneousCustomers = new HashMap<>();
+
+        for (Customer cust : customer1) {
+            Set<ConstraintViolation<Customer>> violations = validator.validate(cust);
+
+            if (!violations.isEmpty()) {
+                // Handle validation errors
+                erroneousCustomers.put(cust, violations);
+
+                // Create and save an error entity for each violation
+                for (ConstraintViolation<Customer> violation : violations) {
+                    ErrorEntity errorEntity = new ErrorEntity();
+                    errorEntity.setEntityName("Customer");
+                    errorEntity.setErrorMessage("Validation Exception for customerID: " + cust.getCustomerID()  + ": " + violation.getMessage());
+//                    errorEntity.setTimestamp(LocalDateTime.now());
+                    errorEntityRepo.save(errorEntity);
+                }
+            } else {
+                // Your logic if validation passes
+                validCustomers.add(cust);
+//                System.out.println("All good for " + cust.getFirstName() + " " + cust.getEmailID());
+            }
+        }
+
+        return new ValidationResult(validCustomers, erroneousCustomers);
+    }
+
+    //------------LOAN--------
+    public ValidationResultLoan checkLoanValidation(List<Loan> loanList) {
+        List<Loan> validLoans = new ArrayList<>();
+        Map<Loan, Set<ConstraintViolation<Loan>>> erroneousLoans = new HashMap<>();
+
+        for (Loan loan : loanList) {
+            Set<ConstraintViolation<Loan>> violations = validator.validate(loan);
+
+            if (!violations.isEmpty()) {
+                erroneousLoans.put(loan, violations);
+                for (ConstraintViolation<Loan> violation : violations) {
+                    ErrorEntity errorEntity = new ErrorEntity();
+                    errorEntity.setEntityName("Loan");
+                    errorEntity.setErrorMessage("Validation Exception for Loan entity with loan ID " + loan.getLoanID() + "And with CustomerID " + loan.getCustomerID() + ": " + violation.getMessage());
+//                    errorEntity.setTimestamp(LocalDateTime.now());
+                    errorEntityRepo.save(errorEntity);
+                }
+            } else {
+                validLoans.add(loan);
+            }
+        }
+
+        return new ValidationResultLoan(validLoans, erroneousLoans);
+    }
+    //---------------account-------------------
+    public ValidationResultAccount checkaccountValidation(List<Account> accountList) {
+        List<Account> validAccounts = new ArrayList<>();
+        Map<Account, Set<ConstraintViolation<Account>>> erroneousaccounts = new HashMap<>();
+
+        for (Account acc : accountList) {
+            Set<ConstraintViolation<Account>> violations = validator.validate(acc);
+
+            if (!violations.isEmpty()) {
+                erroneousaccounts.put(acc, violations);
+                for (ConstraintViolation<Account> violation : violations) {
+                    ErrorEntity errorEntity = new ErrorEntity();
+                    errorEntity.setEntityName("Account");
+                    errorEntity.setErrorMessage("Validation Exception for account entity with account ID " + acc.getAccountID()  + ": " + violation.getMessage());
+//                    errorEntity.setTimestamp(LocalDateTime.now());
+                    errorEntityRepo.save(errorEntity);
+                }
+            } else {
+                validAccounts.add(acc);
+            }
+        }
+
+        return new ValidationResultAccount(validAccounts, erroneousaccounts);
+    }
+    //-----------------branch------------
+    public BranchValidationResult checkBranchValidation(List<Branch> branches) {
+        List<Branch> validBranches = new ArrayList<>();
+        Map<Branch, Set<ConstraintViolation<Branch>>> erroneousBranches = new HashMap<>();
+
+        for (Branch branch : branches) {
+            Set<ConstraintViolation<Branch>> violations = validator.validate(branch);
+
+            if (!violations.isEmpty()) {
+                // Handle validation errors
+                erroneousBranches.put(branch, violations);
+                for (ConstraintViolation<Branch> violation : violations) {
+                    ErrorEntity errorEntity = new ErrorEntity();
+                    errorEntity.setEntityName("Branch");
+                    errorEntity.setErrorMessage("Validation Exception for Branch entity with BranchID " + branch.getBranchID() + ": " + violation.getMessage());
+                    
+                    errorEntityRepo.save(errorEntity);
+                }
+            } else {
+                // Your logic if validation passes
+                validBranches.add(branch);
+//                System.out.println("All good for branch: " + branch.getBranchLocation());
+            }
+        }
+
+        return new BranchValidationResult(validBranches, erroneousBranches);
+    }
+    //-----------------------Transactions-------------
+    public ValidationResultTransaction checkTransactionValidation(List<Transaction> transaction1){
+        List<Transaction> validTransactions = new ArrayList<>();
+        Map<Transaction, Set<ConstraintViolation<Transaction>>> erroneousTransactions = new HashMap<>();
+
+        for (Transaction trs:transaction1){
+            Set<ConstraintViolation<Transaction>> violations = validator.validate(trs);
+
+            if(!violations.isEmpty()){
+                // Handle validation errors
+                erroneousTransactions.put(trs,violations);
+                for (ConstraintViolation<Transaction> violation : violations) {
+                    ErrorEntity errorEntity = new ErrorEntity();
+                    errorEntity.setEntityName("trs");
+                    errorEntity.setErrorMessage("Validation Exception for transaction entity with transactionID " + trs.getTransactionID() +"with accountID"+ trs.getAccountID()+ ": " + violation.getMessage());
+                    
+                    errorEntityRepo.save(errorEntity);
+                }
+            }
+            else {
+                // Your logic if validation passes
+                validTransactions.add(trs);
+//                System.out.println("All good for " + trs.getFirstName() + " " + trs.getEmailID());
+            }
+        }
+        return new ValidationResultTransaction(validTransactions, erroneousTransactions);
+    }
+}
