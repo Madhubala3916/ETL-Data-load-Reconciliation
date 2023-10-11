@@ -1,0 +1,43 @@
+1.	validation on email-------------->@ validation....domain validation
+2.	Notnull validation---id,name
+3.	Number validation(+91 code,10 number digit ,number should strt vth 7,8,9)
+4.	duplicate record detection
+5.	row count validation
+6.	check the datatype- Firstname and lastname should have same or more datasize and datatype.
+
+7.	Data Completeness Validation:
+           •	Check if all expected data records have been successfully extracted from the source systems.
+           •	Verify that no data is missing or incomplete during the extraction phase.
+
+8.	Data Integrity Validation:
+           •	Ensure that foreign key relationships are valid and refer to existing records in related tables.
+           •	Validate that primary keys are unique and not duplicated.
+9.	Data Type Validation:
+          •	Check that data types match the expected types for each column.
+          •	Verify that date fields contain valid date values, numeric fields contain numbers, etc.
+10.	Data Format Validation:
+          •	Validate that data adheres to expected formats, such as email addresses, phone numbers, or postal codes.
+          •	Use regular expressions or custom validation logic for format checks.
+11.	Data Uniqueness Validation:
+          •	Detect and handle duplicate records.
+          •	Ensure that no duplicate data is inserted into the destination.
+12.	Data Transformation Validation:
+          •	Validate the correctness of data transformations and calculations during the ETL process.
+          •	Compare transformed data with expected results.
+13.	Mandatory:
+                identify all fields marked as Mandatory and validate if mandatory fields have values.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
