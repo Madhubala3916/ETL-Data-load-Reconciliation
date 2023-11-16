@@ -1,0 +1,16 @@
+.navbar .navbar-nav .nav-link {
+    color: white;
+  }
+  
+  .navbar .navbar-nav .nav-link:hover {
+    color: yellow;
+  }
+  .navbar {
+    transition: background-color 0.5s; /* Adds a smooth transition effect to the background color */
+  }
+  
+  .scrolled {
+    background-color: #333; /* Change this to your desired color */
+    transition: background-color 0.5s; /* Adds a smooth transition effect to the background color */
+  }
+  

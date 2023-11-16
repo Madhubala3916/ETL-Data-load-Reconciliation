@@ -1,0 +1,28 @@
+/* .hero-container { */
+  /* overflow: hidden; Hide horizontal scrollbar */
+/* } */
+
+/* .hero-image {
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+} */
+
+/* .hero-content { */
+  /* text-align: center; */
+  /* padding: 50px; */
+  /* background-color: rgba(255, 255, 255, 0.7); /* Add a semi-transparent background color to make text more readable */
+/* } */ 
+
+/* .hero-content p {
+  font-size: 24px;
+  color: #333; /* Set your desired text color */
+/* } */ 
+
+/* Add some padding to create space below the Navbar */
+.carousel-img {
+  width: 100%;
+  height: 750px; /* Adjust the height as needed */
+  object-fit: cover;
+}
